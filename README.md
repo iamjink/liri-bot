@@ -30,7 +30,7 @@
   * `OMDB` (http://www.omdbapi.com)
   * `Bands In Town` (http://www.artists.bandsintown.com/bandsintown-api)
  
-### What Each Command Should Do
+## What Each Command Should Do
 
 1. `node liri.js concert-this <artist/band name here>`
 
