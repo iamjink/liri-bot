@@ -4,6 +4,31 @@
 
  LIRI is a _Language_ Interpretation and Recognition Interface. LIRI will be a command line node app that takes in parameters and gives you back data.
 
+ ### NPM Packages
+ 
+ * `Node-Spotify-API`
+ * `Axios`
+ * `Moment`
+ * `DotEnv`
+
+## Node commands
+
+  * `concert-this`
+  * `spotify-this-song`
+  * `movie-this`
+  * `do-what-it-says`
+
+  ## Tools
+
+  * `GitHub`
+  * `Text Editor`
+  * `Node.js`
+
+  ## APIs
+  
+  * `Spotify` (https://developer.spotify.com/)
+  * `OMDB` (http://www.omdbapi.com)
+  * `Bands In Town` (http://www.artists.bandsintown.com/bandsintown-api)
  
 ### What Each Command Should Do
 

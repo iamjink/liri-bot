@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/iamjink/liri-bot/issues"
   },
-  "homepage": "https://github.com/iamjink/liri-bot#readme"
+  "homepage": "https://github.com/iamjink/liri-bot#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "moment": "^2.24.0",
+    "node-spotify-api": "^1.1.1",
+    "webpack-dev-server": "^3.10.3"
+  }
 }
