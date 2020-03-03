@@ -11,11 +11,6 @@ var Spotify = require("node-spotify-api");
 var fs = require("fs");
 
 var spotify = new Spotify(keys.spotify);
-    
-//     {
-//     id: keys.spotify.id,
-//     secret: keys.spotify.secrets
-// });
 
 var defaultMovie = "Mr.Nobody";
 var defaultSong = "The Sign";
@@ -111,8 +106,15 @@ function bands(action) {
 function songs(action) {
 
     spotify.request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
-        .then(function (data) {
-            console.log(data);
+        .then(function (response) {
+            console.log(response);
+            result = `
+           Name of the artist is: ${response.artists[0].name}
+           Name of the song is: ${response.name}
+           Preview link of the song is: ${response.album.external_urls.spotify}
+           Album the song is from is: ${response.album.name}
+            `
+            console.log(result);
         })
         .catch(function (err) {
             console.error('Error occurred: ' + err);
@@ -179,17 +181,17 @@ function songs(action) {
     //         });
 
 
-    }
+}
 
-    function movies(get) {
-        if (moviename === null) {
-            var moviename = defaultMovie;
-            var queryUrl = "http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy";
-            console.log(queryUrl);
+function movies(get) {
+    if (moviename === null) {
+        var moviename = defaultMovie;
+        var queryUrl = "http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy";
+        console.log(queryUrl);
 
-            axios.get("http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy").then(
-                    function (response) {
-                        var result = `
+        axios.get("http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy").then(
+                function (response) {
+                    var result = `
                 The movie's Title is: ${response.data.Title}
                 The movie's Year is: ${response.data.Year}
                 The movie's imbdbRating is: ${response.data.imbdbRating}
@@ -199,33 +201,33 @@ function songs(action) {
                 The movie's plot is: ${response.data.Plot}
                 The movie's actors is: ${response.data.Actors}
                 `
-                        console.log(result);
-                    })
-                .catch(function (error) {
-                    if (error.response) {
-                        console.log("---------------Data---------------");
-                        console.log(error.response.data);
-                        console.log("---------------Status---------------");
-                        console.log(error.response.status);
-                        console.log("---------------Status---------------");
-                        console.log(error.response.headers);
-                    } else if (error.request) {
-                        console.log(error.request);
-                    } else {
-                        console.log("Error", error.message);
-                    }
-                    console.log(error.config);
+                    console.log(result);
                 })
-        } else {
+            .catch(function (error) {
+                if (error.response) {
+                    console.log("---------------Data---------------");
+                    console.log(error.response.data);
+                    console.log("---------------Status---------------");
+                    console.log(error.response.status);
+                    console.log("---------------Status---------------");
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            })
+    } else {
 
-            var moviename = get.split(" ").join("+");
+        var moviename = get.split(" ").join("+");
 
-            var queryUrl = "http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy";
-            console.log(queryUrl);
+        var queryUrl = "http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy";
+        console.log(queryUrl);
 
-            axios.get("http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy").then(
-                    function (response) {
-                        var result = `
+        axios.get("http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy").then(
+                function (response) {
+                    var result = `
                 The movie's Title is: ${response.data.Title}
                 The movie's Year is: ${response.data.Year}
                 The movie's imbdbRating is: ${response.data.imbdbRating}
@@ -235,28 +237,28 @@ function songs(action) {
                 The movie's plot is: ${response.data.Plot}
                 The movie's actors is: ${response.data.Actors}
                 `
-                        console.log(result);
-                    })
-                .catch(function (error) {
-                    if (error.response) {
-                        console.log("---------------Data---------------");
-                        console.log(error.response.data);
-                        console.log("---------------Status---------------");
-                        console.log(error.response.status);
-                        console.log("---------------Status---------------");
-                        console.log(error.response.headers);
-                    } else if (error.request) {
-                        console.log(error.request);
-                    } else {
-                        console.log("Error", error.message);
-                    }
-                    console.log(error.config);
+                    console.log(result);
                 })
-        };
-
+            .catch(function (error) {
+                if (error.response) {
+                    console.log("---------------Data---------------");
+                    console.log(error.response.data);
+                    console.log("---------------Status---------------");
+                    console.log(error.response.status);
+                    console.log("---------------Status---------------");
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            })
     };
 
+};
 
-    // function doWhatItSays() {
 
-    // };
+// function doWhatItSays() {
+
+// };
