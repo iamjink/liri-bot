@@ -9,3 +9,8 @@
             Preview link of the song is: https://p.scdn.co/mp3-preview/b5cad43f8f50514387e9a9b0a3a33a9f5c46c939?cid=c29b8d5e957c4b329ffe08dfe4889351
             Album the song is from is: VII: Sturm Und Drang (Deluxe)
             
+            Name of the artist is: Marilyn Manson
+            Name of the song is: kill4me
+            Preview link of the song is: null
+            Album the song is from is: Heaven Upside Down
+            

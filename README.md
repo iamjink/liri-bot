@@ -85,3 +85,15 @@
        * Language of the movie.
        * Plot of the movie.
        * Actors in the movie.
+
+    `Below are screenshots of the commands and how they work in terminal`
+
+    ![screenshot](images/01.png)
+
+    ![screenshot](images/02.png)
+
+    ![screenshot](images/03.png)
+
+    ![screenshot](images/04.png)
+
+    ![screenshot](images/log.png)
