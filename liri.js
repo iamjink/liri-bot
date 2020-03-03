@@ -238,7 +238,25 @@ function movies(get) {
 
 };
 
+function doWhatItSays() {
+    fs.readFile("random.txt", "utf8", function (err, data) {
+        data = data.split(",");
+        var action = data[0];
+        var get = data[1];
 
-// function doWhatItSays() {
+        switch (action) {
+            case "concert-this":
+                bands(get)
+                break;
 
-// };
+            case "spotify-this-song":
+                songs(get)
+                break;
+
+            case "movie-this":
+                movies(get)
+                break;
+        }
+
+    })
+};
