@@ -50,6 +50,7 @@ function bands(action) {
             Date of the event is: ${moment(response.data[0].datetime).format('MM/DD/YYYY')}
             `
                     console.log(result);
+                    appendLog();
 
                 })
             .catch(function (error) {
@@ -140,6 +141,7 @@ function songs(action) {
             Album the song is from is: ${response.tracks.items[0].album.name}
             `
                 console.log(result);
+                appendLog();
             })
             .catch(function (err) {
                 console.log(err);
@@ -182,6 +184,7 @@ function movies(get) {
                 The movie's actors is: ${response.data.Actors}
                 `
                     console.log(result);
+                    appendLog();
                 })
             .catch(function (error) {
                 if (error.response) {
@@ -218,6 +221,7 @@ function movies(get) {
                 The movie's actors is: ${response.data.Actors}
                 `
                     console.log(result);
+                    appendLog();
                 })
             .catch(function (error) {
                 if (error.response) {
@@ -257,6 +261,14 @@ function doWhatItSays() {
                 movies(get)
                 break;
         }
-
     })
+};
+
+function appendLog() {
+    fs.appendFile("log.txt", result, function (err) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("log.txt was updated!");
+    });
 };
