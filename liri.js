@@ -104,82 +104,62 @@ function bands(action) {
 }
 
 function songs(action) {
+    var songname = process.argv[3];
 
-    spotify.request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
-        .then(function (response) {
-            console.log(response);
-            result = `
-           Name of the artist is: ${response.artists[0].name}
-           Name of the song is: ${response.name}
-           Preview link of the song is: ${response.album.external_urls.spotify}
-           Album the song is from is: ${response.album.name}
+    if (songname == null) {
+        var songname = defaultSong;
+
+        spotify
+            .search({
+                type: 'track',
+                query: "The Sign"
+            })
+            .then(function (response) {
+                result = `
+            Name of the artist is: ${response.tracks.items[0].artists[0].name}
+            Name of the song is: ${"The Sign"}
+            Preview link of the song is: ${response.tracks.items[0].preview_url}
+            Album the song is from is: ${response.tracks.items[0].album.name}
             `
-            console.log(result);
-        })
-        .catch(function (err) {
-            console.error('Error occurred: ' + err);
-        });
+                console.log(result);
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    } else {
+        spotify
+            .search({
+                type: 'track',
+                query: get
+            })
+            .then(function (response) {
+                result = `
+            Name of the artist is: ${response.tracks.items[0].artists[0].name}
+            Name of the song is: ${get}
+            Preview link of the song is: ${response.tracks.items[0].preview_url}
+            Album the song is from is: ${response.tracks.items[0].album.name}
+            `
+                console.log(result);
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    }
 
-
-    // if (songname === null) {
-    //     var songname = defaultSong;
-    //     axios.get("https://rest.bandsintown.com/artists/" + songname + "/events?app_id=codingbootcamp").then(
-    //             function (response) {
-    //                 result = `
-    //         Name of the artist is: ${defaultBand}
-    //         Name of the song is: ${response.data[0].venue.name}
-    //         Preview link of the song is: ${response.data[0].venue.city}, ${response.data[0].venue.region}, ${response.data[0].venue.country}
-    //         Album the song is from is: ${moment(response.data[0].datetime).format('MM/DD/YYYY')}
+    // spotify.request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
+    //     .then(function (response) {
+    //         // console.log(response);
+    //         result = `
+    //        Name of the artist is: ${response.artists[0].name}
+    //        Name of the song is: ${response.name}
+    //        Preview link of the song is: ${response.album.external_urls.spotify}
+    //        Album the song is from is: ${response.album.name}
     //         `
-    //                 console.log(result);
-
-    //             })
-    //         .catch(function (error) {
-    //             if (error.response) {
-    //                 console.log("---------------Data---------------");
-    //                 console.log(error.response.data);
-    //                 console.log("---------------Status---------------");
-    //                 console.log(error.response.status);
-    //                 console.log("---------------Status---------------");
-    //                 console.log(error.response.headers);
-    //             } else if (error.request) {
-    //                 console.log(error.request);
-    //             } else {
-    //                 console.log("Error", error.message);
-    //             }
-    //             console.log(error.config);
-    //         });
-    // } else {
-    //     var songname = get.split(" ").join("+");
-    //     var queryUrl = "https://rest.bandsintown.com/artists/" + songname + "/events?app_id=codingbootcamp";
-    //     console.log(queryUrl);
-
-    //     axios.get("https://rest.bandsintown.com/artists/" + songname + "/events?app_id=codingbootcamp").then(
-    //             function (response) {
-    //                 result = `
-    //                 Name of the artist is: ${defaultBand}
-    //                 Name of the song is: ${response.data[0].venue.name}
-    //                 Preview link of the song is: ${response.data[0].venue.city}, ${response.data[0].venue.region}, ${response.data[0].venue.country}
-    //                 Album the song is from is: ${moment(response.data[0].datetime).format('MM/DD/YYYY')}
-    //                 `
-    //                 console.log(result);
-    //             })
-    //         .catch(function (error) {
-    //             if (error.response) {
-    //                 console.log("---------------Data---------------");
-    //                 console.log(error.response.data);
-    //                 console.log("---------------Status---------------");
-    //                 console.log(error.response.status);
-    //                 console.log("---------------Status---------------");
-    //                 console.log(error.response.headers);
-    //             } else if (error.request) {
-    //                 console.log(error.request);
-    //             } else {
-    //                 console.log("Error", error.message);
-    //             }
-    //             console.log(error.config);
-    //         });
-
+    //         console.log(result);
+    //     })
+    //     .catch(function (err) {
+    //         console.error('Error occurred: ' + err);
+    //     });
 
 }
 
