@@ -5,14 +5,20 @@ require("dotenv").config();
 var keys = require("./keys.js");
 var axios = require("axios");
 var moment = require("moment");
+
+//spotify npm
 var Spotify = require("node-spotify-api");
 var fs = require("fs");
-// var spotify = new Spotify({
+
+var spotify = new Spotify(keys.spotify);
+    
+//     {
 //     id: keys.spotify.id,
 //     secret: keys.spotify.secrets
 // });
+
 var defaultMovie = "Mr.Nobody";
-var defSong = "The Sign";
+var defaultSong = "The Sign";
 var defaultBand = "Metallica";
 
 var action = process.argv[2];
@@ -102,19 +108,88 @@ function bands(action) {
 
 }
 
-function songs() {
+function songs(action) {
 
-}
+    spotify.request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
+        .then(function (data) {
+            console.log(data);
+        })
+        .catch(function (err) {
+            console.error('Error occurred: ' + err);
+        });
 
-function movies(get) {
-    if (moviename === null) {
-        var moviename = defaultMovie;
-        var queryUrl = "http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy";
-        console.log(queryUrl);
 
-        axios.get("http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy").then(
-                function (response) {
-                    var result = `
+    // if (songname === null) {
+    //     var songname = defaultSong;
+    //     axios.get("https://rest.bandsintown.com/artists/" + songname + "/events?app_id=codingbootcamp").then(
+    //             function (response) {
+    //                 result = `
+    //         Name of the artist is: ${defaultBand}
+    //         Name of the song is: ${response.data[0].venue.name}
+    //         Preview link of the song is: ${response.data[0].venue.city}, ${response.data[0].venue.region}, ${response.data[0].venue.country}
+    //         Album the song is from is: ${moment(response.data[0].datetime).format('MM/DD/YYYY')}
+    //         `
+    //                 console.log(result);
+
+    //             })
+    //         .catch(function (error) {
+    //             if (error.response) {
+    //                 console.log("---------------Data---------------");
+    //                 console.log(error.response.data);
+    //                 console.log("---------------Status---------------");
+    //                 console.log(error.response.status);
+    //                 console.log("---------------Status---------------");
+    //                 console.log(error.response.headers);
+    //             } else if (error.request) {
+    //                 console.log(error.request);
+    //             } else {
+    //                 console.log("Error", error.message);
+    //             }
+    //             console.log(error.config);
+    //         });
+    // } else {
+    //     var songname = get.split(" ").join("+");
+    //     var queryUrl = "https://rest.bandsintown.com/artists/" + songname + "/events?app_id=codingbootcamp";
+    //     console.log(queryUrl);
+
+    //     axios.get("https://rest.bandsintown.com/artists/" + songname + "/events?app_id=codingbootcamp").then(
+    //             function (response) {
+    //                 result = `
+    //                 Name of the artist is: ${defaultBand}
+    //                 Name of the song is: ${response.data[0].venue.name}
+    //                 Preview link of the song is: ${response.data[0].venue.city}, ${response.data[0].venue.region}, ${response.data[0].venue.country}
+    //                 Album the song is from is: ${moment(response.data[0].datetime).format('MM/DD/YYYY')}
+    //                 `
+    //                 console.log(result);
+    //             })
+    //         .catch(function (error) {
+    //             if (error.response) {
+    //                 console.log("---------------Data---------------");
+    //                 console.log(error.response.data);
+    //                 console.log("---------------Status---------------");
+    //                 console.log(error.response.status);
+    //                 console.log("---------------Status---------------");
+    //                 console.log(error.response.headers);
+    //             } else if (error.request) {
+    //                 console.log(error.request);
+    //             } else {
+    //                 console.log("Error", error.message);
+    //             }
+    //             console.log(error.config);
+    //         });
+
+
+    }
+
+    function movies(get) {
+        if (moviename === null) {
+            var moviename = defaultMovie;
+            var queryUrl = "http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy";
+            console.log(queryUrl);
+
+            axios.get("http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy").then(
+                    function (response) {
+                        var result = `
                 The movie's Title is: ${response.data.Title}
                 The movie's Year is: ${response.data.Year}
                 The movie's imbdbRating is: ${response.data.imbdbRating}
@@ -124,33 +199,33 @@ function movies(get) {
                 The movie's plot is: ${response.data.Plot}
                 The movie's actors is: ${response.data.Actors}
                 `
-                    console.log(result);
+                        console.log(result);
+                    })
+                .catch(function (error) {
+                    if (error.response) {
+                        console.log("---------------Data---------------");
+                        console.log(error.response.data);
+                        console.log("---------------Status---------------");
+                        console.log(error.response.status);
+                        console.log("---------------Status---------------");
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        console.log(error.request);
+                    } else {
+                        console.log("Error", error.message);
+                    }
+                    console.log(error.config);
                 })
-            .catch(function (error) {
-                if (error.response) {
-                    console.log("---------------Data---------------");
-                    console.log(error.response.data);
-                    console.log("---------------Status---------------");
-                    console.log(error.response.status);
-                    console.log("---------------Status---------------");
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            })
-    } else {
+        } else {
 
-        var moviename = get.split(" ").join("+");
+            var moviename = get.split(" ").join("+");
 
-        var queryUrl = "http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy";
-        console.log(queryUrl);
+            var queryUrl = "http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy";
+            console.log(queryUrl);
 
-        axios.get("http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy").then(
-                function (response) {
-                    var result = `
+            axios.get("http://www.omdbapi.com/?t=" + moviename + "&y=&plot=short&apikey=trilogy").then(
+                    function (response) {
+                        var result = `
                 The movie's Title is: ${response.data.Title}
                 The movie's Year is: ${response.data.Year}
                 The movie's imbdbRating is: ${response.data.imbdbRating}
@@ -160,28 +235,28 @@ function movies(get) {
                 The movie's plot is: ${response.data.Plot}
                 The movie's actors is: ${response.data.Actors}
                 `
-                    console.log(result);
+                        console.log(result);
+                    })
+                .catch(function (error) {
+                    if (error.response) {
+                        console.log("---------------Data---------------");
+                        console.log(error.response.data);
+                        console.log("---------------Status---------------");
+                        console.log(error.response.status);
+                        console.log("---------------Status---------------");
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        console.log(error.request);
+                    } else {
+                        console.log("Error", error.message);
+                    }
+                    console.log(error.config);
                 })
-            .catch(function (error) {
-                if (error.response) {
-                    console.log("---------------Data---------------");
-                    console.log(error.response.data);
-                    console.log("---------------Status---------------");
-                    console.log(error.response.status);
-                    console.log("---------------Status---------------");
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            })
+        };
+
     };
 
-};
 
+    // function doWhatItSays() {
 
-// function doWhatItSays() {
-
-// };
+    // };
